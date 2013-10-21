@@ -9,7 +9,7 @@ import socket
 
 from client import TimblClient
 
-from timblexceptions import ConnectionError
+from timblexceptions import ConnectionError, ServerConnectionError
 
 
 def pid_file(server):

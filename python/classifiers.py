@@ -29,7 +29,6 @@ class MBPT(MBClassifier):
         for i, inst in enumerate(self._classify(word)):
             parse.append(word[i])
             if inst != '0':
-                i = 0
                 for tag in inst.split('+', 1):
                     if tag.startswith('INS'):
                         parse.append(tag[tag.find(':')+1:].decode('utf-8'))
@@ -43,7 +42,15 @@ class MBPT(MBClassifier):
     def pprint_parse(self, results):
         return ''.join(results)
 
-class MBSP(MBClassifier):
-    def __init__(self, host, port, setings):
-        MBClassifier.__init__(self, host, port, settings)
+
+class MBSP(MBPT):
+    def __init__(self, host=HOST, port=PORT, settings=MBPT_CONFIG):
+        MBPT.__init__(self, host, port, settings)
+
+    def stress_pattern(self, word):
+        return ['+' if "'" in elt else '-' for elt in ''.join(self.classify(word)).split('-')]
+
+    def pprint_parse(self, results):
+        return ' '.join(results)
+
 
