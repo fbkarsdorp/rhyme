@@ -1,7 +1,7 @@
 
 from api import MBClassifier
-from util import align
-from config import MBPT_CONFIG, MBSP_CONFIG
+from client import TimblClient
+from config import *
 
 
 def align(word, max_len=20):
@@ -21,28 +21,29 @@ def align(word, max_len=20):
 
 
 class MBPT(MBClassifier):
-	def __init__(self, host, port, settings):
-		MBClassifier.__init__(self, host, port, settings)
+    def __init__(self, host=HOST, port=PORT, settings=MBPT_CONFIG):
+        MBClassifier.__init__(self, host, port, settings)
 
-	def classify(self, word):
-		parse = []
-		for i, inst in enumerate(self._classify(word)):
-			parse.append(word[i])
-			if inst != '0':
-				for tag in inst.split('+'):
-					if ag.starswith('INS'):
-						parse.append(tag[tag.find(':')+1:].decode('utf-8'))
-					elif tag.starswith('DEL'):
-						parse = parse[:-1]
-	    return parse
+    def classify(self, word):
+        parse = []
+        for i, inst in enumerate(self._classify(word)):
+            parse.append(word[i])
+            if inst != '0':
+                i = 0
+                for tag in inst.split('+', 1):
+                    if tag.startswith('INS'):
+                        parse.append(tag[tag.find(':')+1:].decode('utf-8'))
+                    elif tag.startswith('DEL'):
+                        parse = parse[:-1]
+        return parse
 
-	def phonologize(self, word):
-		return self.pprint_parse(self.classify(word))
+    def phonologize(self, word):
+        return self.pprint_parse(self.classify(word))
 
-	def pprint_parse(self, results):
-		return ''.join(result)
+    def pprint_parse(self, results):
+        return ''.join(results)
 
 class MBSP(MBClassifier):
-	def __init__(self, host, port, setings):
-		MBClassifier.__init__(self, hostm settings)
+    def __init__(self, host, port, setings):
+        MBClassifier.__init__(self, host, port, settings)
 

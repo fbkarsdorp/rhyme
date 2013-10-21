@@ -4,6 +4,12 @@ import time
 import subprocess
 import signal
 import psutil
+import tempfile
+import socket
+
+from client import TimblClient
+
+from timblexceptions import ConnectionError
 
 
 def pid_file(server):
@@ -74,21 +80,6 @@ def server_in_use(serverinstance):
         return True
     return False
 
-
-class ConnectionError(Exception):
-    """
-    Exception used to catch connection errors with the timbl server.
-    """
-    def __init__(self, value):
-        self.value = value
-    def __str__(self):
-        return repr(self.value)
-
-
-class ServerConnectionError(ConnectionError):
-    pass
-
-
 class TimblServer(object):
     """
     An interface to the TimblServer. The server can be questioned via
@@ -133,7 +124,7 @@ class TimblServer(object):
         client = None
         try:
             client = TimblClient(port=self.port)
-        except ConnectionError:
+        except (ConnectionError, socket.error):
             del client
             return False
         return True

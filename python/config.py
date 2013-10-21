@@ -1,6 +1,13 @@
 
 import os
 
+print __file__
+# the path where the module resides
+MODULE = os.path.dirname(os.path.abspath(__file__))
+
+# the path pointing relative to MODULE where data resides
+DATA = os.path.join(os.path.split(MODULE)[0], 'data')
+
 # the server address
 HOST = 'localhost'
 

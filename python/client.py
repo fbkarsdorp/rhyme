@@ -2,7 +2,7 @@
 import re
 import socket
 
-from server import ConnectionError
+from timblexceptions import ConnectionError
 
 def format_query(query):
     """
@@ -76,7 +76,7 @@ class TimblClient(object):
                                         socket.getprotobyname('tcp'))
             self.socket.connect((self.host, self.port))
             self.socket.recv(self.packet_size)
-        except socket.error:
+        except socket.error, e:
             raise ConnectionError(
                 'Cannot connect to server at %s' % self.name)
 
