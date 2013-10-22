@@ -48,7 +48,7 @@ class MBSP(MBPT):
         MBPT.__init__(self, host, port, settings)
 
     def stress_pattern(self, word):
-        return ['+' if "'" in elt else '-' for elt in self.phonologize(word).split('-')]
+        return ['1' if "'" in elt else '0' for elt in self.phonologize(word).split('-')]
 
     def pprint_parse(self, results):
         return ' '.join(results)

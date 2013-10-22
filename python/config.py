@@ -47,4 +47,4 @@ MBSP_CONFIG = dict(
     # We use inverse distance weighting
     #d = 'ID',
     # instancebase used by MBMA
-    i = os.path.join(DATA, 'stress.instancebase'))
+    i = os.path.join(DATA, 'phonology.instancebase'))
