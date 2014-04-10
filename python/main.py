@@ -59,7 +59,7 @@ if __name__ == '__main__':
     tokenizer = Tokenizer('-L nl -n -Q')
     with classifier(config.HOST, config.PORT, settings) as program:
         args.output.write(codecs.BOM_UTF8)
-        for i, line in enumerate(codecs.open(args.testfile, encoding-config.ENCODING)):
+        for i, line in enumerate(codecs.open(args.testfile, encoding=config.ENCODING)):
             words = tokenizer.tokenize(line.strip(), tokens = lambda s: s.split())
             output = []
             for word in word:

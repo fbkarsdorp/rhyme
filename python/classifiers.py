@@ -16,7 +16,7 @@ def align(word, max_len=20):
         An examplar (str) to be classified
     """
     if not isinstance(word, basestring):
-        return ValueError('Word %s is nto of type basestring' % word)
+        return ValueError('Word %s is not of type basestring' % word)
     return ','.join(list('%s%s?' % ('='*(max_len-len(word)), word)))
 
 
@@ -49,8 +49,5 @@ class MBSP(MBPT):
 
     def stress_pattern(self, word):
         return ['1' if "'" in elt else '0' for elt in self.phonologize(word).split('-')]
-
-    def pprint_parse(self, results):
-        return ' '.join(results)
 
 

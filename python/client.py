@@ -11,7 +11,9 @@ def format_query(query):
     Args:
         - query (str): the query send to the timblserver.
     """
-    query = query.encode('utf-8')
+    #query = query.encode('utf-8')
+    if not isinstance(query, unicode):
+        query = unicode(query)
     # all queries must start with 'c '!
     if not query.startswith('c '):
         query = 'c ' + query.strip()

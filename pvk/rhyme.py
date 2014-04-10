@@ -23,8 +23,7 @@ def addPhonemes(melody):
 			elif flatmelody[i].lyrics[0].syllabic == 'single':
 				tophonologize = flatmelody[i].lyrics[0].text
 				tophonologize = re.sub(r"[ \.,;:]", "", tophonologize)
-				#print tophonologize
-				phon = mbpt.phonologize(tophonologize)
+				phon = mbpt.phonologize(tophonologize.decode('utf-8'))
 				#print phon
 				accent = "0"
 				if len(phon) > 0 and phon[0] == "'" :
