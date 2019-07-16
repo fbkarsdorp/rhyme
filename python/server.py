@@ -110,7 +110,7 @@ class TimblServer(object):
         """
         command_list = [self.process]
         command_list.extend(
-            ['-S', '%s' % self.port, '--pidfile=', pid_file(self)])
+            ['-S', '%s' % self.port, '--pidfile=%s' % pid_file(self)])
         for option, value in self.features.items():
             if not option.startswith(('-','+')):
                 option = '-%s' % option
